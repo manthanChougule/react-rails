@@ -3,12 +3,32 @@ import Home from './Home'
 import NewUser from './NewUser'
 import Users from './Users'
 import Order from './Order'
-import { Route, Switch} from 'react-router-dom'
+import { BrowserRouter as Router,
+    Route,
+    Switch,
+    Link
+} from 'react-router-dom'
 
 class App extends Component {
     render() {
         return (
+            <Router>
             <div>
+                <ul>
+                    <li>
+                        <Link to="/">Home</Link>
+                    </li>
+                    <li>
+                        <Link to="/new_user">NewUser</Link>
+                    </li>
+                    <li>
+                        <Link to="/order"> Order </Link>
+                    </li> 
+                    <li>
+                        <Link to="/users"> Users </Link>
+                    </li>  
+                </ul>
+                <hr />         
                 {/*Welcome !!!!!!!!*/}
                 <Switch>
                     <Route exact path="/" component={Home} />
@@ -17,6 +37,7 @@ class App extends Component {
                     <Route exact path="/users" component={Users} />
                 </Switch>
             </div>
+            </Router>
         );
     }
 }
