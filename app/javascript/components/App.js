@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
 import Home from './Home'
 import NewUser from './NewUser'
-import Users from './Users'
+//import AllUser from './AllUsers'
+import User from './User'
 import Order from './Order'
 import { BrowserRouter as Router,
     Route,
     Switch,
     Link
 } from 'react-router-dom'
+import AllUsers from './AllUsers'
+
 
 class App extends Component {
     render() {
@@ -25,8 +28,11 @@ class App extends Component {
                         <Link to="/order"> Order </Link>
                     </li> 
                     <li>
-                        <Link to="/users"> Users </Link>
+                        <Link to="/user"> user </Link>
                     </li>  
+                    <li>
+                        <Link to="/all_users">AllUser</Link>
+                    </li>
                 </ul>
                 <hr />         
                 {/*Welcome !!!!!!!!*/}
@@ -34,7 +40,8 @@ class App extends Component {
                     <Route exact path="/" component={Home} />
                     <Route exact path="/new_user" component={NewUser} />
                     <Route exact path="/order" component={Order} />
-                    <Route exact path="/users" component={Users} />
+                    <Route exact path="/user" component={User} />
+                    <Route exact path="all_users" component={AllUsers} />
                 </Switch>
             </div>
             </Router>

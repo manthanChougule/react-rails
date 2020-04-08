@@ -1,23 +1,19 @@
-// Run this example by adding <%= javascript_pack_tag 'hello_react' %> to the head of your layout file,
-// like app/views/layouts/application.html.erb. All it does is render <div>Hello React</div> at the bottom
-// of the page.
-
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter as Router, Route} from 'react-router-dom'
+//import { BrowserRouter as Router, Route} from 'react-router-dom'
 import App from '../components/App'
 
 import { createStore } from 'redux'
-import { provider } from 'react-redux'
+import { Provider } from 'react-redux'
+import { pageReducer } from '../reducers/pageReducer'
 
-
+const store = createStore(pageReducer);
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
-    /*<Router>
-      <Route path="/" component={App} />
-    </Router>*/
-    <App />,
+    <Provider store={store}>
+    <App />
+    </Provider>,
     document.body.appendChild(document.createElement('div')),
   )
 })
