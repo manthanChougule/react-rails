@@ -14,8 +14,8 @@ export const pageReducer = (state = [], action ) => {
                         ...user,
                         firstname:action.data.newFirstName,
                         lastname:action.data.newLastName,
-                        email:action.data.newEmail,
-                        bithdate:action.data.newBirthdate,
+                        //email:action.data.newEmail,
+                        //bithdate:action.data.newBirthdate,
                         contact:action.data.newContact,
                         address:action.data.newAddress,
                         editing:!user.editing

@@ -1,66 +1,89 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button'
+//import phoneRegExp from './Regx'
+import { Formik, Field, Form, ErrorMessage } from 'formik'
+import * as Yup from 'yup'
+//import { Link } from 'react-router-dom';
 
 class NewUser extends Component {
-    handleSubmit = (e) =>{
-        e.preventDefault();
-        const firstname = this.getFirstName.value;
-        const lastname = this.getLastName.value;
-        const email = this.getEmail.value;
-        const birthdate = this.getBirthdate.value; 
-        const contact = this.getContact.value;
-        const address = this.getAddress.value;
-        const data ={
-            id: new Date(),
-            firstname,
-            lastname,
-            email,
-            birthdate,
-            contact,
-            address
-        }
 
-        console.log(data)
-        this.props.dispatch({
-            type:'ADD_USER',
-            data});
-            this.getFirstName.value = '';
-            this.getLastName.value = '';
-            this.getEmail.value = '';
-            this.getBirthdate.value = '';
-            this.getContact.value = '';
-            this.getAddress.value = '';
-    }
     render() {
         return (
-            <div>
-               <h1>Fill the Info</h1>
-               <form >
-                   <h3>First Name</h3>
-                   <input required type="text" ref={(input) => this.getFirstName = input}
-                   placeholder="First Name"/>
-                   <h3>Last Name</h3>
-                   <input required type="text" ref={(input) => this.getLastName = input}
-                   placeholder="Last Name"/>
-                   <h3>Email</h3>
-                   <input required type="email" ref={(input) => this.getEmail = input} 
-                   placeholder="Enter Ur Email" />
-                   <h3>BirthDate</h3>
-                   <input required type="date" ref={(input) => this.getBirthdate = input}
-                   placeholder="Enter Ur BirthDate"/>
-                   <h3>Contact</h3>
-                   <input required type="number" ref={(input) => this.getContact = input}
-                   placeholder="Enter Ur Phone NO" />
-                   <h3>Address</h3>
-                   <textarea required rows="5" ref={(input) => this.getAddress = input}
-                   cols="20" placeholder="Enter address" /><br />
-                   <Button onClick={this.handleSubmit}
-                   variant="contained" color="primary">
-                    Submit</Button>
-                    {/*<button>Submit</button>*/}
-               </form> 
-            </div>
+            <Formik 
+            initialValues={{
+                id: new Date,
+                firstname: '',
+                lastname: '',
+                contact: '',
+                address: ''
+            }}
+            validationSchema={Yup.object().shape({
+                firstname: Yup.string()
+                    .min(2, "*First Name at least have 2 characters")
+                    .max(100, "*First cant be longer than 100 character")
+                    .required('First Name is Required'),
+                lastname: Yup.string()
+                    .min(2, "*Last Name at least have 2 characters")
+                    .max(100, "*Last cant be longer than 100 character")
+                    .required('Last Name is Required'),
+                contact: Yup.string()
+                    //.matches(phoneRegExp, "*Phone number is not valid")
+                    .required("*Phone number Required"),
+                address: Yup.string()
+                    .min(10, "*Address at least have 10 characters")
+                    .max(100, "*Address cant be longer than 100 character")    
+            })}
+            onSubmit={(values, {setSubmitting, resetForm}) => {
+                setSubmitting(true);
+
+                setTimeout(() => {
+                    this.props.dispatch({type: 'ADD_USER', values})
+                    console.log(values);
+                    resetForm();
+                    setSubmitting(false);
+                }, 500);
+            }}>
+
+            {( {values,
+                errors,
+                touched
+                }) => (
+                    <Form>
+                        <label>First name </label><br />
+                        <Field 
+                            name="firstname"
+                            type="text" 
+                            className={'form-control' + touched.firstname && errors.firstname ? "error" : null}
+                        /><br />
+                            <ErrorMessage name="firstname" />
+                        <label>Last name </label><br />
+                        <Field 
+                            name="lastname"
+                            type="text" 
+                            className={'form-control' + touched.lastname && errors.lastname ? "error" : null}
+                        /><br />
+                        <ErrorMessage name="lastname" />
+                        <label>Contact</label><br />
+                        <Field
+                            name="contact"
+                            type="text"
+                            className={'form-control' + touched.contact && errors.contact ? "error" : null }
+                        /><br />
+                        <ErrorMessage name="contact"/>
+                        <label>Address</label><br />
+                        <Field
+                            name="address"
+                            type="text"
+                            className={'form-control' + touched.address && errors.address ? "error": null}
+                        /><br /><br />
+                        <ErrorMessage name="address" />
+                        <Button type="submit" 
+                            variant="contained" color="primary">
+                            Submit</Button>
+                    </Form>  
+                )}
+            </Formik>    
         );
     }
 }

@@ -19,7 +19,7 @@ class App extends Component {
             <div>
                 <ul>
                     <li>
-                        <Link to="/">Home</Link>
+                        <Link to="/">Listing</Link>
                     </li>
                     <li>
                         <Link to="/new_user">NewUser</Link>

@@ -7,16 +7,16 @@ class EditUser extends Component {
         e.preventDefault();
         const newFirstName = this.getFirstName.value;
         const newLastName = this.getLastName.value;
-        const newEmail = this.getEmail.value;
-        const newBirthdate = this.getBirthdate.value; 
+        //const newEmail = this.getEmail.value;
+        //const newBirthdate = this.getBirthdate.value; 
         const newContact = this.getContact.value;
         const newAddress = this.getAddress.value;
         const data ={
             id: new Date(),
             newFirstName,
             newLastName,
-            newEmail,
-            newBirthdate,
+            //newEmail,
+            //newBirthdate,
             newContact,
             newAddress,
             editing:false
@@ -33,12 +33,12 @@ class EditUser extends Component {
                 <h3>Last Name :</h3>
                 <input required type="text" ref={(input) => this.getLastName = input}
                 defaultValue={this.props.user.lastname} placeholder="Last Name"/>
-                <h3>Email :</h3>
+                {/*<h3>Email :</h3>
                 <input required type="email" ref={(input) => this.getEmail = input} 
                 defaultValue={this.props.user.email} placeholder="Enter Ur Email" />
                 <h3>BirthDate :</h3>
                 <input required type="date" ref={(input) => this.getBirthdate = input}
-                defaultValue={this.props.user.birthdate} placeholder="Enter Ur BirthDate"/>
+                defaultValue={this.props.user.birthdate} placeholder="Enter Ur BirthDate"/>*/}
                 <h3>Contact</h3>
                 <input required type="number" ref={(input) => this.getContact = input}
                 defaultValue={this.props.user.contact} placeholder="Enter Ur Phone NO" />

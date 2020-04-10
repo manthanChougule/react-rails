@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-//import { BrowserRouter as Router, Route} from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
 import App from '../components/App'
 
 import { createStore } from 'redux'
@@ -11,9 +11,11 @@ const store = createStore(pageReducer);
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
+    <BrowserRouter>
     <Provider store={store}>
     <App />
-    </Provider>,
+    </Provider>
+    </BrowserRouter >,
     document.body.appendChild(document.createElement('div')),
   )
 })
