@@ -10,8 +10,8 @@ class User extends Component {
     render() {
         return(
             <div>
-                <h2>First Name: {this.props.user.firstname}</h2>
-                <h2>Last Name: {this.props.user.lastname}</h2>
+                <h2>First Name: {this.props.value.firstname}</h2>
+                <h2>Last Name: {this.props.value.lastname}</h2>
                 {/*<h2>{this.props.user.email}</h2>
                 <h2>{this.props.user.birthdate}</h2>*/}
                 <h2>Contact: {this.props.user.contact}</h2>

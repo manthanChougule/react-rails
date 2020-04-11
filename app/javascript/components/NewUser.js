@@ -1,91 +1,69 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import Button from '@material-ui/core/Button'
-//import phoneRegExp from './Regx'
-import { Formik, Field, Form, ErrorMessage } from 'formik'
+import React, {Component} from 'react'
+import {Formik} from 'formik'
+import withStyles from '@material-ui/core/styles/withStyles'
+import Container from '@material-ui/core/Container';
+import Paper from '@material-ui/core/Paper'
+import {Form} from '../container/Form'
 import * as Yup from 'yup'
-//import { Link } from 'react-router-dom';
+import {connect} from 'react-redux'
 
-class NewUser extends Component {
 
+const styles = theme => ({
+    paper: {
+        marginTop: theme.spacing.unit * 8,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        padding: `${theme.spacing.unit * 5}px ${theme.spacing.unit * 5}px ${theme
+        .spacing.unit * 5}px`
+    },
+    container: {
+    maxWidth: "200px"
+    }
+});
+
+const phoneRegExp2 = /^[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-/\s.]?[0-9]{4}$/
+
+const validationSchema = Yup.object({
+    firstname: Yup.string()
+            .min(2, "*First Name at least have 2 characters")
+            .max(50, "*First cant be longer than 50 character")
+            .required('First Name is Required'),
+        lastname: Yup.string()
+            .min(2, "*Last Name at least have 2 characters")
+            .max(50, "*Last cant be longer than 50 character")
+            .required('Last Name is Required'),
+        contact: Yup.string()
+            .matches(phoneRegExp2, "*Phone number is not valid")
+            .required("*Phone number Required"),
+        address: Yup.string()
+            .min(20, "*Address at least have 20 characters")
+            .max(100, "*Address cant be longer than 100 character")
+            .required("Adress is required")
+})
+
+class InputForm extends Component {
     render() {
+        const classes = this.props;
+        const values = { firstname: "", lastname: "" , contact: "", address: "" };
         return (
-            <Formik 
-            initialValues={{
-                id: new Date,
-                firstname: '',
-                lastname: '',
-                contact: '',
-                address: ''
-            }}
-            validationSchema={Yup.object().shape({
-                firstname: Yup.string()
-                    .min(2, "*First Name at least have 2 characters")
-                    .max(100, "*First cant be longer than 100 character")
-                    .required('First Name is Required'),
-                lastname: Yup.string()
-                    .min(2, "*Last Name at least have 2 characters")
-                    .max(100, "*Last cant be longer than 100 character")
-                    .required('Last Name is Required'),
-                contact: Yup.string()
-                    //.matches(phoneRegExp, "*Phone number is not valid")
-                    .required("*Phone number Required"),
-                address: Yup.string()
-                    .min(10, "*Address at least have 10 characters")
-                    .max(100, "*Address cant be longer than 100 character")    
-            })}
-            onSubmit={(values, {setSubmitting, resetForm}) => {
-                setSubmitting(true);
-
-                setTimeout(() => {
-                    this.props.dispatch({type: 'ADD_USER', values})
-                    console.log(values);
-                    resetForm();
-                    setSubmitting(false);
-                }, 500);
-            }}>
-
-            {( {values,
-                errors,
-                touched
-                }) => (
-                    <Form>
-                        <label>First name </label><br />
-                        <Field 
-                            name="firstname"
-                            type="text" 
-                            className={'form-control' + touched.firstname && errors.firstname ? "error" : null}
-                        /><br />
-                            <ErrorMessage name="firstname" />
-                        <label>Last name </label><br />
-                        <Field 
-                            name="lastname"
-                            type="text" 
-                            className={'form-control' + touched.lastname && errors.lastname ? "error" : null}
-                        /><br />
-                        <ErrorMessage name="lastname" />
-                        <label>Contact</label><br />
-                        <Field
-                            name="contact"
-                            type="text"
-                            className={'form-control' + touched.contact && errors.contact ? "error" : null }
-                        /><br />
-                        <ErrorMessage name="contact"/>
-                        <label>Address</label><br />
-                        <Field
-                            name="address"
-                            type="text"
-                            className={'form-control' + touched.address && errors.address ? "error": null}
-                        /><br /><br />
-                        <ErrorMessage name="address" />
-                        <Button type="submit" 
-                            variant="contained" color="primary">
-                            Submit</Button>
-                    </Form>  
-                )}
-            </Formik>    
-        );
+            <React.Fragment>
+                <div className={classes.container}>
+                    <Paper elevation={1} className={classes.paper}>
+                    <Container maxWidth="sm">
+                        <h1>Form</h1>
+                        <Formik 
+                            render={props => <Form {...props}/>}
+                            initialValues={values}
+                            validationSchema={validationSchema}
+                        />
+                    </Container>
+                    </Paper>
+                </div>
+            </React.Fragment>
+        )
     }
 }
 
+const NewUser = withStyles(styles)(InputForm)
 export default connect()(NewUser)

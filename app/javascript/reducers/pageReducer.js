@@ -1,4 +1,10 @@
-export const pageReducer = (state = [], action ) => {
+
+
+const initialState = {
+    users: []
+};
+
+export default function userReducer(state = initialState, action ){
     switch(action.type) {
         case 'ADD_USER':
             return state.concat([action.data]);
