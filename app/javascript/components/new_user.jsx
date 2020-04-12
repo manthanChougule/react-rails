@@ -9,61 +9,61 @@ import {connect} from 'react-redux'
 
 
 const styles = theme => ({
-    paper: {
-        marginTop: theme.spacing(8),
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        padding: `${theme.spacing(5)}px ${theme.spacing(5)}px ${theme
-        .spacing(5)}px`
-    },
-    container: {
-    maxWidth: "200px"
-    }
+  paper: {
+    marginTop: theme.spacing(8),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    padding: `${theme.spacing(5)}px ${theme.spacing(5)}px ${theme
+    .spacing(5)}px`
+  },
+  container: {
+  maxWidth: "200px"
+  }
 });
 
 const phoneRegExp2 = /^[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-/\s.]?[0-9]{4}$/
 
 const validationSchema = Yup.object({
-    firstname: Yup.string()
-            .min(2, "*First Name at least have 2 characters")
-            .max(50, "*First cant be longer than 50 character")
-            .required('First Name is Required'),
-        lastname: Yup.string()
-            .min(2, "*Last Name at least have 2 characters")
-            .max(50, "*Last cant be longer than 50 character")
-            .required('Last Name is Required'),
-        contact: Yup.string()
-            .matches(phoneRegExp2, "*Phone number is not valid")
-            .required("*Phone number Required"),
-        address: Yup.string()
-            .min(20, "*Address at least have 20 characters")
-            .max(100, "*Address cant be longer than 100 character")
-            .required("Adress is required")
+  firstname: Yup.string()
+      .min(2, "*First Name at least have 2 characters")
+      .max(50, "*First cant be longer than 50 character")
+      .required('First Name is Required'),
+  lastname: Yup.string()
+      .min(2, "*Last Name at least have 2 characters")
+      .max(50, "*Last cant be longer than 50 character")
+      .required('Last Name is Required'),
+  contact: Yup.string()
+      .matches(phoneRegExp2, "*Phone number is not valid")
+      .required("*Phone number Required"),
+  address: Yup.string()
+      .min(20, "*Address at least have 20 characters")
+      .max(100, "*Address cant be longer than 100 character")
+      .required("Adress is required")
 })
 
 class InputForm extends Component {
-    render() {
-        const classes = this.props;
-        const values = { firstname: "", lastname: "" , contact: "", address: "" };
-        return (
-            <React.Fragment>
-                <div className={classes.container}>
-                    <Paper elevation={1} className={classes.paper}>
-                    <Container maxWidth="sm">
-                        <h1>Form</h1>
-                        <Formik 
-                            initialValues={values}
-                            validationSchema={validationSchema}
-                        >
-                            {props => <Form {...props}/>}
-                        </Formik>
-                    </Container>
-                    </Paper>
-                </div>
-            </React.Fragment>
-        )
-    }
+  render() {
+    const classes = this.props;
+    const values = { firstname: "", lastname: "" , contact: "", address: "" };
+    return (
+      <React.Fragment>
+        <div className={classes.container}>
+          <Paper elevation={1} className={classes.paper}>
+            <Container maxWidth="sm">
+              <h1>Form</h1>
+              <Formik 
+                initialValues={values}
+                validationSchema={validationSchema}
+              >
+                {props => <Form {...props}/>}
+              </Formik>
+            </Container>
+          </Paper>
+        </div>
+      </React.Fragment>
+    )
+  }
 }
 
 // const mapStateToProps = (state) => {
