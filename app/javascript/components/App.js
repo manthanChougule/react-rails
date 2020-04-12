@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
-import Home from './Home'
-import NewUser from './NewUser'
+import Home from './home'
+import NewUser from './new_user'
 //import AllUser from './AllUsers'
-import User from './User'
-import Order from './Order'
+import User from './user'
+import Order from './order'
 import { BrowserRouter as Router,
     Route,
     Switch,
     Link
 } from 'react-router-dom'
-import AllUsers from './AllUsers'
+import Users from './users'
 
 
 
@@ -43,7 +43,7 @@ class App extends Component {
                     <Route exact path="/new_user" component={NewUser} />
                     <Route exact path="/order" component={Order} />
                     <Route exact path="/user" component={User} />
-                    <Route exact path="all_users" component={AllUsers} />
+                    <Route exact path="all_users" component={Users} />
                 </Switch>
             </div>
             </Router>

@@ -3,19 +3,19 @@ import {Formik} from 'formik'
 import withStyles from '@material-ui/core/styles/withStyles'
 import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper'
-import {Form} from '../container/Form'
+import {Form} from '../container/form'
 import * as Yup from 'yup'
 import {connect} from 'react-redux'
 
 
 const styles = theme => ({
     paper: {
-        marginTop: theme.spacing.unit * 8,
+        marginTop: theme.spacing(8),
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        padding: `${theme.spacing.unit * 5}px ${theme.spacing.unit * 5}px ${theme
-        .spacing.unit * 5}px`
+        padding: `${theme.spacing(5)}px ${theme.spacing(5)}px ${theme
+        .spacing(5)}px`
     },
     container: {
     maxWidth: "200px"
@@ -53,10 +53,11 @@ class InputForm extends Component {
                     <Container maxWidth="sm">
                         <h1>Form</h1>
                         <Formik 
-                            render={props => <Form {...props}/>}
                             initialValues={values}
                             validationSchema={validationSchema}
-                        />
+                        >
+                            {props => <Form {...props}/>}
+                        </Formik>
                     </Container>
                     </Paper>
                 </div>
@@ -64,6 +65,12 @@ class InputForm extends Component {
         )
     }
 }
+
+// const mapStateToProps = (state) => {
+//     return {
+//         users: state.props.values
+//     }
+// }
 
 const NewUser = withStyles(styles)(InputForm)
 export default connect()(NewUser)

@@ -1,25 +1,29 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 
 
 export const Form = (props) => {
     const {
-        values: { firstname, lastname, contact, address },
+        values = { id: new Date(), firstname, lastname, contact, address },
         errors,
         touched,
-        handleSubmit,
         handleChange,
         isValid,
         setFieldTouched
     } = props;
+
+    const handleSubmit = (dispatch) => {
+        this.props.dispatch({type: 'ADD_USER',values})
+    }
     
     const change = ( name, e ) => {
         e.persist();
         handleChange(e);
         setFieldTouched(name, true, false);
     };
-    
+    console.log(props)
     return (
         <form onSubmit={handleSubmit}>
             <TextField
