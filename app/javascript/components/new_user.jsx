@@ -13,14 +13,16 @@ const styles = theme => ({
     marginTop: theme.spacing(8),
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
-    padding: `${theme.spacing(5)}px ${theme.spacing(5)}px ${theme
-    .spacing(5)}px`,
+    //alignItems: "center",
+    padding: `${theme.spacing(5)}px ${theme.spacing(5)}px ${theme.spacing(5)}px `,
     maxWidth: "sm"
   },
   container: {
-  maxWidth: "200px"
-  }
+  maxWidth: "500px"
+  },
+  // container2: {
+  //   padding: `${theme.spacing(5)}px ${theme.spacing(5)}px`,
+  // }
 });
 
 const phoneRegExp2 = /^[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-/\s.]?[0-9]{4}$/
@@ -51,7 +53,7 @@ class InputForm extends Component {
       <React.Fragment>
         <div className={classes.container}>
           <Paper elevation={1} className={classes.paper}>
-            <Container maxWidth="sm">
+            <Container className={classes.container2}>
               <h1>Form</h1>
               <Formik 
                 initialValues={values}
