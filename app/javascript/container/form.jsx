@@ -4,19 +4,18 @@ import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 
 
-export const Form = (props) => {
+const Form = (props) => {
   const {
-    values = { id: new Date(), firstname, lastname, contact, address },
+    values: { id, firstname, lastname, contact, address },
     errors,
     touched,
     handleChange,
     isValid,
     setFieldTouched
   } = props;
-
-  const handleSubmit = (dispatch) => {
-    this.props.dispatch({type: 'ADD_USER', values}) 
-  }
+  
+  const handleSubmit = (props) => { this.props.dispatch({type: 'ADD_USER', props})}
+  console.log(props.values);
   
   const change = ( name, e ) => {
     e.persist();
@@ -72,9 +71,11 @@ export const Form = (props) => {
         variant="contained" 
         color="primary"
         disabled={!isValid}
-      >
+      > {/*onClick={ () => {dispatch({type: 'ADD_USER' , props})}}*/}
         Submit
       </Button>
     </form>
   );
 };
+
+export default connect()(Form) 

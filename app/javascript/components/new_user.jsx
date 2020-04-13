@@ -3,7 +3,7 @@ import {Formik} from 'formik'
 import withStyles from '@material-ui/core/styles/withStyles'
 import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper'
-import {Form} from '../container/form'
+import Form from '../container/form'
 import * as Yup from 'yup'
 import {connect} from 'react-redux'
 
@@ -15,7 +15,8 @@ const styles = theme => ({
     flexDirection: "column",
     alignItems: "center",
     padding: `${theme.spacing(5)}px ${theme.spacing(5)}px ${theme
-    .spacing(5)}px`
+    .spacing(5)}px`,
+    maxWidth: "sm"
   },
   container: {
   maxWidth: "200px"
@@ -45,7 +46,7 @@ const validationSchema = Yup.object({
 class InputForm extends Component {
   render() {
     const classes = this.props;
-    const values = { firstname: "", lastname: "" , contact: "", address: "" };
+    const values = { id: new Date(),firstname: "", lastname: "" , contact: "", address: "" };
     return (
       <React.Fragment>
         <div className={classes.container}>
@@ -67,8 +68,9 @@ class InputForm extends Component {
 }
 
 // const mapStateToProps = (state) => {
+//   console.log(state)
 //     return {
-//         users: state.props.values
+//         users: state.users
 //     }
 // }
 
