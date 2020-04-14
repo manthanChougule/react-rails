@@ -20,11 +20,11 @@ class Users extends Component {
   }
 }
 
-// const mapStateToProps = (state) => {
-//   console.log("Hello",state)
-//   return {
-//     users: state.users
-//   }
-// }
+const mapStateToProps = (state) => {
+  console.log("Hello",state)
+  return {
+    users: state.users
+  }
+}
 
-export default connect()(Users)
+export default connect(mapStateToProps)(Users)

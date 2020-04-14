@@ -1,21 +1,21 @@
-export const addUser = (values) => {
-  return (dispatch) => {
-    dispatch({type: 'ADD_USER',
-          payload: values});
-  }
-} 
+import types from './type'
 
-export const deleteUser = () => {
-  return (dispatch) => {
-    dispatch({
-      type: 'DELETE_USER',
-    })
+const addUser = (values) => {
+  return  {
+    type: types.ADD_USER,
+    payload: values
   }
 }
 
-export const addUsers = (values) => {
-    return {
-      type: "ADD_USER",
-      values: values
-    }
+const deleteUser = (user) => {
+  return {
+    type: types.DELETE_USER,
+    payload: user.id
+  }
+}
+
+export default {
+  addUser,
+  deleteUser,
+
 }

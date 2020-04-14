@@ -2,22 +2,21 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
+import addUser from '../actions'
 
-
-const Form = (props) => {
+const Form = (props,{dispatch}) => {
   const {
-    values: { id, firstname, lastname, contact, address },
+    values: {firstname, lastname, contact, address },
     errors,
     touched,
     handleChange,
-    handleSubmit,
     isValid,
     setFieldTouched
   } = props;
   
-  // handleSubmit = (values, {props}) => props.dispatch({type: 'ADD_USER', values})
-  // console.log(props.values);
-  // console.log(props);
+   console.log("Values is arr?",props.values);
+   console.log("Props" ,props);
+   console.log("Errors",props.errors)
   
   const change = ( name, e ) => {
     e.persist();
@@ -26,7 +25,7 @@ const Form = (props) => {
   };
   console.log(props)
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={() => dispatch(addUser(props.values))}>
       <TextField
         id="firstname"
         name="firstname"
@@ -73,11 +72,15 @@ const Form = (props) => {
         variant="contained" 
         color="primary"
         disabled={!isValid}
-      > {/*onClick={ () => {dispatch({type: 'ADD_USER' , props})}}*/}
+      > 
         Submit
       </Button>
     </form>
   );
-};
+};  
 
-export default connect()(Form) 
+// const mapDispatchToProps = ({
+//   submit: addUser(values)
+// })
+
+export default connect()(Form)   
