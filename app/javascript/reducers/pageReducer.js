@@ -7,7 +7,7 @@ const initialState = {
 export default function userReducer(state = initialState, action ){
 	switch(action.type) {
 		case 'ADD_USER':
-			return state.concat([action.props.values]);
+			return state.concat([action.payload]); // state.concat([action.payload])
 		case 'DELETE_USER':
 			return state.filter((user) => user.id !== action.id);
 		case 'EDIT_USER':

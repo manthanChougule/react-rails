@@ -1,12 +1,14 @@
 import React,{Component} from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
+// import SwipeableViews from 'react-swipeable-views'
 import AppBar from  '@material-ui/core/AppBar'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 import { Paper } from '@material-ui/core'
 import Typography from '@material-ui/core/Typography'
 import { Link, Route, BrowserRouter, Switch } from 'react-router-dom'
+//import CSSTransitionGroup from 'react-transition-group'
 import Home from './home'
 import NewUser from './new_user'
 
@@ -54,7 +56,7 @@ class NavTabs extends Component {
 							onChange={this.handleChange}
 							indicatorColor="primary"
 							textColor="primary"
-							fullWidth
+							//fullWidth
 						>
 							<Tab label="Listing" component={Link} to="/" />
 							<Tab label="NewUser" component={Link} to="new_user" />
@@ -94,6 +96,23 @@ function TabTwo() {
 		</Paper>
 	)
 }
+
+// const PageShell = (Page, previous) => {
+// 	return props => (
+// 		<div className="page">
+// 			<CSSTransitionGroup
+// 				transitionAppear={true}
+// 				transitionAppearTimeout={600}
+// 				transitionEnterTimeout={600}
+// 				transitionAppearLeaveTimeout={600}
+// 				transitionName={props.match.path === "/" ? "SlideIn" : "SlideOut"}
+// 			>
+// 				{console.log(props)}
+// 				<Page {...props} />
+// 			</CSSTransitionGroup>
+// 		</div>	
+// 	)
+// }
 
 
 export default withStyles(styles, {withTheme: true})(NavTabs);

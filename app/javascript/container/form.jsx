@@ -10,12 +10,14 @@ const Form = (props) => {
     errors,
     touched,
     handleChange,
+    handleSubmit,
     isValid,
     setFieldTouched
   } = props;
   
-  const handleSubmit = (props) => { this.props.dispatch({type: 'ADD_USER', props})}
-  console.log(props.values);
+  // handleSubmit = (values, {props}) => props.dispatch({type: 'ADD_USER', values})
+  // console.log(props.values);
+  // console.log(props);
   
   const change = ( name, e ) => {
     e.persist();

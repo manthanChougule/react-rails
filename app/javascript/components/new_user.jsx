@@ -6,6 +6,7 @@ import Paper from '@material-ui/core/Paper'
 import Form from '../container/form'
 import * as Yup from 'yup'
 import {connect} from 'react-redux'
+import { addUser, addUsers } from '../actions'
 
 
 const styles = theme => ({
@@ -20,9 +21,9 @@ const styles = theme => ({
   container: {
   maxWidth: "500px"
   },
-  // container2: {
-  //   padding: `${theme.spacing(5)}px ${theme.spacing(5)}px`,
-  // }
+  container2: {
+    padding: `${theme.spacing(5)}px ${theme.spacing(5)}px`,
+  }
 });
 
 const phoneRegExp2 = /^[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-/\s.]?[0-9]{4}$/
@@ -49,6 +50,7 @@ class InputForm extends Component {
   render() {
     const classes = this.props;
     const values = { id: new Date(),firstname: "", lastname: "" , contact: "", address: "" };
+    const handleSubmit = (values) => dispatch(addUsers(values))
     return (
       <React.Fragment>
         <div className={classes.container}>
@@ -58,6 +60,7 @@ class InputForm extends Component {
               <Formik 
                 initialValues={values}
                 validationSchema={validationSchema}
+                onSubmit={handleSubmit}
               >
                 {props => <Form {...props}/>}
               </Formik>
@@ -69,12 +72,12 @@ class InputForm extends Component {
   }
 }
 
-// const mapStateToProps = (state) => {
-//   console.log(state)
-//     return {
-//         users: state.users
-//     }
-// }
+const mapStateToProps = (state) => {
+  console.log("New_User",state)
+    return {
+        users: state.users
+    }
+}
 
 const NewUser = withStyles(styles)(InputForm)
-export default connect()(NewUser)
+export default connect(mapStateToProps)(NewUser)
